@@ -189,7 +189,7 @@
             P(y_1 = B, y_2 = 0) &= \frac{2}{9} \\
             P(y_1 = B, y_2 = 1) &= \frac{3}{9} \\
             P(y_1 = A, y_2 = 0 | P) &= \frac{2}{5} \\
-            P(y_1 = A, y_2 = 1 | P) &= \frac{1}{4} \\
+            P(y_1 = A, y_2 = 1 | P) &= \frac{1}{5} \\
             P(y_1 = B, y_2 = 0 | P) &= \frac{1}{5} \\
             P(y_1 = B, y_2 = 1 | P) &= \frac{1}{5} \\
             P(y_1 = A, y_2 = 0 | N) &= 0 \\
@@ -216,14 +216,14 @@
         \begin{align*}
             \mu_{y_3,P} &= \frac{1.1 + 0.8 + 0.5 + 0.9 + 0.8}{5} = 0.82 \\
             \sigma_{y_3,P} &= \sqrt{\frac{(1.1 - 0.82)^2 + (0.8 - 0.82)^2 + (0.5 - 0.82)^2 + ...}{5}} \\
-                          &\approx 0.218
+                          &\approx 0.217
         \end{align*}
-    
+        
         \item For Negative (N):
         \begin{align*}
             \mu_{y_3,N} &= \frac{1.0 + 0.9 + 1.2 + 0.9}{4} = 1.0 \\
             \sigma_{y_3,N} &= \sqrt{\frac{(1.0 - 1.0)^2 + (0.9 - 1.0)^2 + (1.2 - 1.0)^2 + (0.9 - 1.0)^2}{4}} \\
-                          &\approx 0.1225
+                          &\approx 0.1414
         \end{align*}
 
     \end{itemize}
@@ -239,12 +239,83 @@
     \begin{align*}
     \text{where } P(h | y_1, y_2, y_3) &= \frac{P(y_1, y_2, y_3 | h) \cdot P(h)}{P(y_1, y_2, y_3)} \\[10pt]
     &= \frac{P(y_1, y_2 | h) \cdot P(y_3 | h) \cdot P(h)}{P(y_1, y_2) \cdot P(y_3)} \\[10pt]
-    \text{where } P(y_3 | h) &= \frac{1}{\sigma_h \sqrt{2\pi}} \exp\left(-\frac{(y_3 - \mu_h)^2}{2\sigma_h^2}\right) \\
-    \text{and } P(y_3) &= \frac{1}{\0.2 \sqrt{2\pi}} \exp\left(-\frac{(y_3 - 0.9)^2}{2 \cdot 0.2^2}\right)
+    \text{where } P(y_3 | h) &= \frac{1}{\sigma_h \sqrt{2\pi}} \exp\left(-\frac{(y_3 - \mu_h)^2}{2\sigma_h^2}\right) \\[10pt]
+    \text{and } P(y_3) &= \frac{1}{0.2 \sqrt{2\pi}} \exp\left(-\frac{(y_3 - 0.9)^2}{2 \cdot 0.2^2}\right)
     \end{align*}
 
 \end{enumerate}
 
+\item \begin{enumerate} 
+    \item For instance (A, 1, 0.8):
+
+
+    For class \( P \):
+    \begin{align*}
+    P(y_3=0.8 | P) &= \frac{1}{0.217 \sqrt{2\pi}} \exp\left(-\frac{(0.8 - 0.82)^2}{2 \cdot 0.217^2}\right) \\[10pt]
+    &= 1.83\\
+    P(y_3=0.8) &= \frac{1}{0.2 \sqrt{2\pi}} \exp\left(-\frac{(0.8 - 0.9)^2}{2 \cdot 0.2^2}\right) \\[10pt]
+    &= 1.76\\
+    P(P | y_1=A, y_2=1, y_3=0.8) &= \frac{\frac{5}{9} \cdot \frac{1}{5} \cdot 1.83}{\frac{2}{9} \cdot 1.76} \\[10pt]
+    &\approx 0.519
+    \end{align*}
+
+    
+    For class N:
+    \begin{align*}
+    P(y_3=0.8 | N) &= \frac{1}{0.1414 \sqrt{2\pi}} \exp\left(-\frac{(0.8 - 1.0)^2}{2 \cdot 0.1414^2}\right) \\[10pt]
+    &= 1.038\\
+    P(N | y_1=A, y_2=1, y_3=0.8) &= \frac{\frac{4}{9} \cdot \frac{1}{4} \cdot 1.038}{\frac{2}{9} \cdot 1.76} \\[10pt]
+    &\approx 0.295
+    \end{align*}
+    
+    Since $0.519 > 0.295$, the predicted class is P.
+    
+    \item For instance (B, 1, 1):
+    
+    For class \( P \):
+    \begin{align*}
+    P(y_3=1 | P) &= \frac{1}{0.217 \sqrt{2\pi}} \exp\left(-\frac{(1 - 0.82)^2}{2 \cdot 0.217^2}\right) \\[10pt]
+    &=1.304 \\
+    P(y_3=1) &= \frac{1}{0.2 \sqrt{2\pi}} \exp\left(-\frac{(1 - 0.9)^2}{2 \cdot 0.2^2}\right) \\[10pt]
+    &= 1.76\\
+    P(P | y_1=B, y_2=1, y_3=1) &= \frac{\frac{5}{9} \cdot \frac{1}{5} \cdot 1.304}{\frac{3}{9} \cdot 1.76} \\[10pt]
+    &\approx 0.247 
+    \end{align*}
+
+    
+    For class N:
+    \begin{align*}
+    P(y_3=1 | N) &= \frac{1}{0.1414 \sqrt{2\pi}} \exp\left(-\frac{(1 - 1.0)^2}{2 \cdot 0.1414^2}\right) \\[10pt]
+    &= 2.82\\
+    P(N | y_1=B, y_2=1, y_3=1) &= \frac{\frac{4}{9} \cdot \frac{1}{4} \cdot 2.82}{\frac{3}{9} \cdot 1.76} \\[10pt]
+    &\approx 0.534
+    \end{align*}
+    
+    Since $0.247 < 0.534$, the predicted class is N.
+    
+    \item For instance (B, 0, 0.9):
+    
+    For class \( P \):
+    \begin{align*}
+    P(y_3=0.9 | P) &= \frac{1}{0.217 \sqrt{2\pi}} \exp\left(-\frac{(0.9 - 0.82)^2}{2 \cdot 0.217^2}\right) \\[10pt]
+    &= 1.72\\
+    P(y_3=0.9) &= \frac{1}{0.2 \sqrt{2\pi}} \exp\left(-\frac{(0.9 - 0.9)^2}{2 \cdot 0.2^2}\right) \\[10pt]
+    &= 1.99\\
+    P(P | y_1=B, y_2=0, y_3=0.9) &= \frac{\frac{5}{9} \cdot \frac{1}{5} \cdot 1.72}{\frac{2}{9} \cdot 1.99} \\[10pt]
+    &\approx 0.432
+    \end{align*}
+
+    
+    For class N:
+    \begin{align*}
+    P(y_3=0.9 | N) &= \frac{1}{0.1414 \sqrt{2\pi}} \exp\left(-\frac{(0.9 - 1.0)^2}{2 \cdot 0.1414^2}\right) \\[10pt]
+    &= 2.20\\
+    P(N | y_1=B, y_2=0, y_3=0.9) &= \frac{\frac{4}{9} \cdot \frac{2}{4} \cdot 2.20}{\frac{2}{9} \cdot 1.99} \\[10pt]
+    &\approx 1.106
+    \end{align*}
+    
+    Since $0.432 < 1.106$, the predicted class is P.
+\end{enumerate}
 
 \end{enumerate}
 
@@ -264,3 +335,4 @@
 % ----------------------------------------------------------------------
 
 \end{document}
+
