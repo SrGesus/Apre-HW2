@@ -1,0 +1,9 @@
+img/IST_A-eps-converted-to.pdf
+*.aux
+*.log
+*.out
+*.toc
+_* 
+*.fdb_latexmk
+*.fls
+*.gz
