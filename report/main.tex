@@ -17,6 +17,8 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{amsmath}
+\usepackage{caption}     
+\usepackage{subcaption}
 \usepackage[normalem]{ulem}
 
 \usepackage{indentfirst}
@@ -581,6 +583,63 @@ Train and test accuracies:
 Increasing the number of neighbours, in the knns of both weights (Uniform and Distance), improves the generalization capacity of the model. The model tends to overfit the smaller the number of neighbours parameter is. This is because when you increase n\_neighbors, the model considers more neighboring data points to make a prediction. This therefore prevents overfitting because the decision is based on a larger sample of the training data, rather than on a few close neighbors.
 
 \end{enumerate}
+
+\item
+The Naive Bayes model assumes that the features of the data have a distribution similar to that of a normal distribution.
+However, some features do not conform to normal distributions well
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/cp_distrib.png}
+        \caption{cp feature distribution}
+        \label{fig:cp}
+    \end{subfigure}
+    \hfill % Add horizontal space between subfigures
+    \begin{subfigure}{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/ca_distrib.png}
+        \caption{ca feature distribution}
+        \label{fig:ca}
+    \end{subfigure}
+    \hfill % Add horizontal space between subfigures
+    \begin{subfigure}{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/sex_distrib.png}
+        \caption{sex feature distribution}
+        \label{fig:sex}
+    \end{subfigure}
+    \caption{Feature distributions}
+    \label{fig:distributions}
+\end{figure}
+
+
+The model also assumes that the features are independent to one another. However, some features appear to not be independent to one another.
+For example those with heart disease who have sex == 1, seem to tend to have a younger age than those with sex == 0.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/age_sex0.png}
+        \caption{age distribution with sex==0}
+        \label{fig:cp}
+    \end{subfigure}
+    \hfill % Add horizontal space between subfigures
+    \begin{subfigure}{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/age_sex1.png}
+        \caption{age distribution with sex==1}
+        \label{fig:ca}
+    \end{subfigure}
+    \caption{Feature distributions}
+    \label{fig:distributions}
+\end{figure}
+
+After making a statistical test of such hypothesis and obtaining a pvalue of 0.007 we can say that evidence supports it being true even for common significance levels of $\alpha$ = 0.01.
+
+
 \end{enumerate}
 
 \vskip 1cm
