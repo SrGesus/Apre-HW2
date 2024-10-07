@@ -349,21 +349,21 @@ as can be seen in the confusion matrix:
       \end{align*}
       
       \begin{align*}
-        \sigma_{y_3} &= \sqrt{\frac{(1.1 - 0.9)^2 + (0.8 - 0.9)^2 + (0.5 - 0.9)^2 + (0.9 - 0.9)^2...}{9}} \\
+        \sigma_{y_3} &= \sqrt{\frac{(1.1 - 0.9)^2 + (0.8 - 0.9)^2 + (0.5 - 0.9)^2 + (0.9 - 0.9)^2...}{8}} \\
                   &\approx 0.2
       \end{align*}
       
       \item For Positive (P):
       \begin{align*}
         \mu_{y_3,P} &= \frac{1.1 + 0.8 + 0.5 + 0.9 + 0.8}{5} = 0.82 \\
-        \sigma_{y_3,P} &= \sqrt{\frac{(1.1 - 0.82)^2 + (0.8 - 0.82)^2 + (0.5 - 0.82)^2 + ...}{5}} \\
+        \sigma_{y_3,P} &= \sqrt{\frac{(1.1 - 0.82)^2 + (0.8 - 0.82)^2 + (0.5 - 0.82)^2 + ...}{4}} \\
                   &\approx 0.217
       \end{align*}
       
       \item For Negative (N):
       \begin{align*}
         \mu_{y_3,N} &= \frac{1.0 + 0.9 + 1.2 + 0.9}{4} = 1.0 \\
-        \sigma_{y_3,N} &= \sqrt{\frac{(1.0 - 1.0)^2 + (0.9 - 1.0)^2 + (1.2 - 1.0)^2 + (0.9 - 1.0)^2}{4}} \\
+        \sigma_{y_3,N} &= \sqrt{\frac{(1.0 - 1.0)^2 + (0.9 - 1.0)^2 + (1.2 - 1.0)^2 + (0.9 - 1.0)^2}{3}} \\
                   &\approx 0.1414
       \end{align*}
 
@@ -536,22 +536,60 @@ Under a ML assumption, for the word $w$:
 \end{minipage}
 }
 \end{enumerate}
-\raggedright
 
 \large{\textbf{Part II}: Programming}\normalsize
 
 \begin{enumerate}[leftmargin=\labelsep]
-\item Solution to the programming questions here.
+\item \begin{enumerate}
+    \item Boxplot comparison of the KNN and the Naive Bayes with Gaussian Assumption:
+    
+    \begin{figure}[H]  % Forces the figure to stay here
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/boxplots.png}
+        \caption{Boxplots}
+        \label{fig:enter-label}
+    \end{figure}
+    
+       The KNN had an overall lower accuracy and was less stable regarding the performance results compared to the Naive Bayes model. This is likely because of the dataset was not scaled. Based on the fact that a knn makes prediction based on the "closest points" to an instance, if the features are on different scales, one feature with a large range will dominate the distance calculation, which can distort the actual "closeness" between points and therefore cause a unstability in the performance of the KNN. 
+    
+\item 
+Original KNN score: 0.65 ± 0.05 \\
+KNN score on scaled dataset: 0.82 ± 0.02 \\
+Original Naive Bayes score: 0.84 ± 0.03 \\
+Naive Bayes score on scaled dataset: 0.84 ± 0.03 \\
 
-\vskip 1cm
-\textbf{End note}: do not forget to also submit your Jupyter notebook
+The KNN model had significant improvement in accuracy and had more stable results after min-max scaling the dataset. As mentioned in the previous answer the K-nearest neighbour models are sensitive to the scale of the dataset, and scaling can significantly improve the performance of the model. Scaling ensures that all features contribute equally to the distance calculation in the KNN. 
 
-\newpage
+The Naive bayes model with a gaussian assumption had very little to no difference in the results between the scaled and non-scaled data. In the Gaussian model, each feature is modeled separately with its own mean ($\mu$) and variance ($\sigma$) according to the normal distribution. The Naive Bayes model with a Gaussian assumption is insensitive to scaling because this mean and variance are put into consideration when calculating predictions. This explains the indifference in the results.
+
+\item
+p1$>$p2? pval= 0.7462688051215336
+
+Through the statistical hypothesis test we received a very high p-value (pval= 0.7462688) and therefore reject the hypothesis asserting that is not true.
+
+\item
+Train and test accuracies:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/knn_accs.png}
+        \caption{KNN accuracies}
+        \label{fig:enter-label}
+    \end{figure}
+
+\item 
+Increasing the number of neighbours, in the knns of both weights (Uniform and Distance), improves the generalization capacity of the model. The model tends to overfit the smaller the number of neighbours parameter is. This is because when you increase n\_neighbors, the model considers more neighboring data points to make a prediction. This therefore prevents overfitting because the decision is based on a larger sample of the training data, rather than on a few close neighbors.
 
 \end{enumerate}
+\end{enumerate}
+
+\vskip 1cm
+
+\newpage
 
 % ----------------------------------------------------------------------
 % Cover
 % ----------------------------------------------------------------------
 
 \end{document}
+
